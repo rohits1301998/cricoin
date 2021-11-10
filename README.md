@@ -23,6 +23,6 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 
 ## Run prod server
 
-Run `npm run prod`
+Run `npm run prod-serve`
 
 

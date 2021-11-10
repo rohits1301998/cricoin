@@ -1,0 +1,44 @@
+.navbar {
+  position: sticky;
+  height: 4rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: white;
+  .navbar__content {
+    width: 75%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+  }
+
+  .logo {
+    position: absolute;
+    left: 0;
+
+    .logo-text {
+      font-weight: bolder;
+      font-size: 1.3rem;
+    }
+
+    .logo-text-colored {
+      color: rgb(24, 198, 131);
+    }
+  }
+
+  .settings {
+    position: absolute;
+    right: 0;
+  }
+}
+
+.fiat {
+  font-size: 0.8rem;
+}
+
+.fiats-dropdown {
+  width: 10rem;
+}
+
+

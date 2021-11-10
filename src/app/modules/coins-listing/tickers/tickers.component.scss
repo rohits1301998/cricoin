@@ -1,0 +1,22 @@
+.tickers-wrapper {
+  background: linear-gradient(to right, rgb(63, 81, 181), rgb(100, 181, 246)) rgb(255, 255, 255);
+  color: white;
+}
+
+.ticker {
+  font-size: 0.8rem;
+  white-space: nowrap;
+  .price {
+    font-weight: 700;
+  }
+  
+}
+
+.ticker:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  border: 1px solid white;
+  position: absolute;
+  right: -15px;
+}

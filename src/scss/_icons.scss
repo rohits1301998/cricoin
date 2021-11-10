@@ -1,0 +1,37 @@
+
+@mixin small-arrow {
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+
+cricoin-icon .icon {
+  &.arrow-up::before {
+    content: "\2191";
+  }
+
+  &.arrow-down::before {
+    content: "\2193";
+  }
+
+  &.setting::before {
+    content: "\2741";
+  }
+  &.heart::before {
+    content: "\2764";
+  }
+
+  &.small-arrow-up {
+
+    @include small-arrow();
+    border-bottom: 5px solid black;
+  }
+
+  &.small-arrow-down {
+    @include small-arrow();
+    border-top: 5px solid black;
+  }
+
+}

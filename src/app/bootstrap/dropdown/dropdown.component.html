@@ -1,0 +1,22 @@
+<button (click)="toggleDropdown()" cdkOverlayOrigin class="dropdown-trigger cursor-pointer"  #trigger="cdkOverlayOrigin">
+  <div class="d-flex align-items-center w-100 position-relative">
+    <span>{{ selectedOption ? selectedOption[displayField] : defaultOption || label }}</span>
+    <cricoin-icon class="dropdown-arrow" [name]="'small-arrow-' + (isOpen ? 'up' : 'down')"></cricoin-icon>
+  </div>
+</button>
+
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+  (overlayOutsideClick)="toggleDropdown()"
+>
+  <ul class="dropdown-list" [style.width.px]="trigger?.elementRef?.nativeElement?.clientWidth">
+    <li class="dropdown-item" *ngFor="let option of options">
+      <button class="dropdown-item__btn p-2 cursor-pointer" (click)="selectItem(option)">
+        <ng-template [ngTemplateOutlet]="optionTmpl" [ngTemplateOutletContext]="{$implicit: option}"></ng-template>
+      </button>
+    </li>
+  </ul>
+</ng-template>

@@ -1,0 +1,187 @@
+<section class="p-2" id="tickers">
+  <h3>Tickers</h3>
+  <cricoin-tickers></cricoin-tickers>
+</section>
+
+<section *ngIf="favoriteCoins.length > 0" class="p-2" id="favorite-coins-list">
+  <h3>Favorite Crypto Coins (Max 3)</h3>
+  <cricoin-listing [dataSource]="favoriteCoins" >
+    <cricoin-listing-column [hidable]="true"  [align]="'center'" [colSpan]="1" [id]="'rank'" label="Rank">
+      <ng-template let-row>
+        <span class="coin-info">{{ row?.rank }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [align]="'left'" [id]="'name'" label="Name">
+      <ng-template let-row>
+        <div class="row align-items-center">
+          <div class="col-3">
+            <cricoin-img [width]="30" [height]="30" [alt]="row?.name" [src]="row?.icon"></cricoin-img>
+          </div>
+          <div class="col">
+            <div [attr.title]="row?.name" class="coin-name text-truncate coin-info">{{ row?.name }}</div>
+            <div  class="coin-symbol text-muted">{{ row?.symbol }}</div>
+          </div>
+        </div>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column  [id]="'price'" label="Price">
+      <ng-template let-row>
+            <span class="coin-info">{{ row?.price | cricoinCurrency : currentCurrency }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [hidable]="true"  [id]="'marketCap'" label="Market Cap">
+      <ng-template let-row>
+        <span class="coin-info">{{ row?.marketCap | cricoinCurrency : currentCurrency }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+  
+    <cricoin-listing-column [hidable]="true" [id]="'availableSupply'" label="Supply">
+      <ng-template let-row>
+            <span class="coin-info">{{ row?.availableSupply | cricoinCurrency : '-' }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [hidable]="true" [id]="'volume'" label="Volume">
+      <ng-template let-row>
+            <span class="coin-info">{{ row?.volume | cricoinCurrency : currentCurrency }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [colSpan]="1" [id]="'priceChange1d'" label="Change(1d)">
+      <ng-template let-row>
+            <span class="percent-change" [ngClass]="{ 'text-danger': row?.priceChange1d < 0,  'text-success': row?.priceChange1d >= 0}">{{ row?.priceChange1d }}%</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [colSpan]="1" [hidable]="true" [id]="'priceChange1h'" label="Change(1h)">
+      <ng-template let-row>
+            <span class="percent-change" [ngClass]="{ 'text-danger': row?.priceChange1h < 0,  'text-success': row?.priceChange1h >= 0}">{{ row?.priceChange1h }}%</span>
+      </ng-template>
+    </cricoin-listing-column>
+  </cricoin-listing>
+</section>
+
+
+<section class="p-2" id="coins-list">
+  <cricoin-listing [loading]="isCoinsLoading" [dataSource]="coins" [expandedRowTmpl]="coinDetailsTmpl" (sortingChanged)="sortCoins($event)" (rowExpanded)="displayCoinMarkets($event)">
+    <cricoin-listing-column [hidable]="true" [sort]="true" [align]="'center'" [colSpan]="1" [id]="'rank'" label="Rank">
+      <ng-template let-row>
+        <span class="coin-info">{{ row?.rank }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [align]="'left'" [id]="'name'" label="Name">
+      <ng-template let-row>
+        <div class="row align-items-center">
+          <div class="col-3">
+            <cricoin-img [width]="30" [height]="30"  [alt]="row?.name" [src]="row?.icon"></cricoin-img>
+          </div>
+          <div class="col">
+            <div [attr.title]="row?.name" class="coin-name text-truncate coin-info">{{ row?.name }}</div>
+            <div  class="coin-symbol text-muted">{{ row?.symbol }}</div>
+          </div>
+        </div>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [sort]="true" [id]="'price'" label="Price">
+      <ng-template let-row>
+            <span class="coin-info">{{ row?.price | cricoinCurrency : currentCurrency }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [hidable]="true" [sort]="true" [id]="'marketCap'" label="Market Cap">
+      <ng-template let-row>
+        <span class="coin-info">{{ row?.marketCap | cricoinCurrency : currentCurrency }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+  
+    <cricoin-listing-column [hidable]="true" [id]="'availableSupply'" label="Supply">
+      <ng-template let-row>
+            <span class="coin-info">{{ row?.availableSupply | cricoinCurrency : '-' }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [hidable]="true" [id]="'volume'" label="Volume">
+      <ng-template let-row>
+            <span class="coin-info">{{ row?.volume | cricoinCurrency : currentCurrency }}</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [sort]="true" [colSpan]="1" [id]="'priceChange1d'" label="Change(1d)">
+      <ng-template let-row>
+            <span class="percent-change" [ngClass]="{ 'text-danger': row?.priceChange1d < 0,  'text-success': row?.priceChange1d >= 0}">{{ row?.priceChange1d }}%</span>
+      </ng-template>
+    </cricoin-listing-column>
+  
+    <cricoin-listing-column [hidable]="true" [colSpan]="1" [sort]="true" [id]="'priceChange1h'" label="Change(1h)">
+      <ng-template let-row>
+            <span class="percent-change" [ngClass]="{ 'text-danger': row?.priceChange1h < 0,  'text-success': row?.priceChange1h >= 0}">{{ row?.priceChange1h }}%</span>
+      </ng-template>
+    </cricoin-listing-column>
+
+    <cricoin-listing-column [id]="'favorite'" label="">
+      <ng-template let-row>
+        <cricoin-icon *ngIf="row?.isFavorite || favoriteCoins.length < 3" (click)="toggleFavorite($event, row)" [class.active]="row?.isFavorite" class="favorite-icon" [name]="'heart'"></cricoin-icon>
+      </ng-template>
+    </cricoin-listing-column>
+  </cricoin-listing>
+  
+  <div class="d-flex justify-content-center m-5" *ngIf="showViewMore" (click)="fetchNextCoins()">
+    <button class="view-more cursor-pointer">View More</button>
+  </div>
+</section>
+
+
+
+
+
+<ng-template #coinDetailsTmpl let-coin>
+  <div class="p-3">
+
+    <div class="row my-2 align-items-center">
+      <div class="col-3">
+        <cricoin-img  [alt]="coin?.name" [height]="60" [width]="60" [src]="coin?.icon"></cricoin-img>
+      </div>
+      <div class="col-8 col-offset-2">
+        <div><strong>{{ coin?.name }} ({{ coin?.symbol }})</strong></div>
+        <div class="text-muted">{{ currentDate | date: 'longDate' }}</div>
+      </div>
+    </div>
+
+    <cricoin-listing [loading]="isCoinMarketsLoading" class="d-block w-100 coin-markets" [dataSource]="(coinMarkets$ | async) || []">
+
+      <cricoin-listing-column [hidable]="true" [align]="'left'" [id]="'exchange'" label="Exchange">
+        <ng-template let-row>
+              <span class="coin-info">{{ row?.exchange }}</span>
+        </ng-template>
+      </cricoin-listing-column>
+  
+      <cricoin-listing-column  [align]="'left'" [id]="'pair'" label="Pair">
+        <ng-template let-row>
+              <span class="coin-info">{{ row?.pair }}</span>
+        </ng-template>
+      </cricoin-listing-column>
+  
+      <cricoin-listing-column  [id]="'price'" label="Price">
+        <ng-template let-row>
+          <span class="coin-info">{{ row?.price | cricoinCurrency : currentCurrency }}</span>
+        </ng-template>
+      </cricoin-listing-column>
+  
+      <cricoin-listing-column [hidable]="true" [id]="'volume'" label="Volume">
+        <ng-template let-row>
+          <span class="coin-info">{{ row?.volume | cricoinCurrency : currentCurrency }}</span>
+        </ng-template>
+      </cricoin-listing-column>
+
+     
+  
+    </cricoin-listing>
+  </div>
+</ng-template>

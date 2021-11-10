@@ -1,0 +1,20 @@
+<div class="row tickers-wrapper p-2">
+
+  <div class="col-12 ticker my-2 py-2" *ngFor="let exchange of exchangesTickers; let i = index">
+    <div class="row align-items-start">
+      <div class="col-2 col-md-1 col-lg-1">
+        <h2 class="text-capitalize m-0">{{ exchanges[i] }} </h2>
+      </div>
+      <div class="col-1">
+
+      </div>
+      <div class="col-9 d-flex flex-wrap">
+        <div class="ticker mx-3 my-1 position-relative" *ngFor="let ticker of (exchange | async)">
+          {{ ticker?.from }}-{{ ticker?.to }} ({{ ticker.price | cricoinCurrency : ticker?.to }})
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,36 @@
+@import 'cricoin.scss';
+
+table {
+  border-collapse: collapse;
+  position: relative;
+  box-shadow: rgb(0 0 0 / 40%) 0px 2px 15px -3px;
+  border-radius: 2px;
+  th {
+    font-weight: 400;
+    font-size: 0.8rem;
+  }
+}
+
+tbody {
+  tr {
+    height: 3rem;
+    vertical-align: middle;
+    border: 1px solid $text-light;
+  }
+}
+
+thead {
+  background-color: $background-light;
+  height: 2rem;
+  vertical-align: middle;
+}
+
+
+@media screen and (max-width: 776px) {
+  th, td {
+    &.hidable {
+      display: none;
+    }
+  }
+}
+

@@ -1,0 +1,34 @@
+<table class="w-100">
+  <thead>
+    <tr>
+      <th [class.hidable]="column?.hidable" (click)="toggleColumnSort(column)" [class.cursor-pointer]="column?.sort" [attr.colspan]="column?.colSpan" class="p-2 text-muted text-{{column?.align}}"  *ngFor="let column of columns; trackBy: _listDataTracker">
+        <span>{{ column?.label }}</span>
+        <span *ngIf="sortedColumn?.id === column?.id">
+          <cricoin-icon [name]="'arrow-' + (sortedColumn?.direction === 'ASC' ? 'up' : 'down' )"></cricoin-icon>
+        </span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="loading && dataSource.length === 0">
+      <tr>
+        <td class="p-1" colspan="100%">
+          <ngx-skeleton-loader class="w-100" count="10" appearance="line"></ngx-skeleton-loader>
+        </td>
+      </tr>
+    </ng-container>
+    <ng-container *ngFor="let row of dataSource; trackBy: _listDataTracker">
+      <tr class="cursor-pointer" tabindex="0" (click)="toggleRow(row)">
+        <td [class.hidable]="column?.hidable" [attr.colspan]="column?.colSpan" class="text-{{column?.align}} p-2" *ngFor="let column of columns">
+          <ng-template [ngTemplateOutlet]="column.columnTmpl" [ngTemplateOutletContext]="{ $implicit: row }"></ng-template>
+        </td>
+      </tr>
+      <tr *ngIf="expandedRowTmpl && row?.expanded">
+        <td colspan="100%">
+          <ng-template [ngTemplateOutlet]="expandedRowTmpl" [ngTemplateOutletContext]="{ $implicit: row }"></ng-template>
+        </td>
+      </tr>
+    </ng-container>
+
+  </tbody>
+</table>

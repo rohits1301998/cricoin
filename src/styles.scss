@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Bootstrap imports
+@import "bootstrap/scss/bootstrap-utilities";
+@import "bootstrap/scss/bootstrap-grid";
+
+
+@import '@angular/cdk/overlay-prebuilt.css';
+
+
+// global styles
+@import "scss/globals";

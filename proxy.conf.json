@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target": "https://api.coinstats.app",
+    "secure": true,
+    "pathRewrite": {
+      "^/api": "/public/v1"
+    }
+  }
+}

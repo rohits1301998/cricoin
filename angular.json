@@ -15,7 +15,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "cricoin",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -68,7 +68,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cricoin:build"
+            "browserTarget": "cricoin:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {

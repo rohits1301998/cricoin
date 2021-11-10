@@ -1,0 +1,47 @@
+.coin-name {
+  letter-spacing: 1px;
+}
+
+.coin-symbol {
+  font-size: 0.7rem;
+}
+
+.coin-info, .percent-change {
+  font-weight: 400;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.view-more {
+  background-color: rgb(24, 198, 131);
+  color: white;
+  box-shadow: rgb(0 0 0 / 40%) 0px 2px 15px -3px;
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.coin-markets {
+  max-height: 25rem;
+  overflow: auto;
+}
+
+.favorite-icon {
+  opacity: 0.1;
+  &.active {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .coin-name {
+    max-width: 4rem !important;
+  }
+}
+
+
+@media screen and (min-width: 361px) and (max-width: 450px) {
+  .coin-name {
+    max-width: 6rem !important;
+  }
+}
